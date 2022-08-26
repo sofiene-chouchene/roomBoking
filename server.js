@@ -1,9 +1,22 @@
 const dbconfig = require("./db");
 const express = require("express");
+require("dotenv").config();
 const app = express();
+const room = require("./models/rooms");
+const users = require("./models/users");
 const roomsrout = require("./routes/roomRouter");
-
+const singleRoom = require("./routes/singleRooms");
+const RegisterUser = require("./routes/Register");
+const loginUser = require("./routes/login");
+const booking = require("./routes/BookingRoute");
+const { notFound, errorHandler } = require("./middleware/errorHandler");
+// app.use(notFound);
+// app.use(errorHandler);
+app.use(express.json());
 app.use("/api/rooms", roomsrout);
+app.use("/api", singleRoom);
+app.use("/api", RegisterUser);
+app.use("/api", loginUser);
+app.use("/api", booking);
 
-const port = process.env.port || 5000;
-app.listen(port, () => console.log("server login"));
+app.listen(5000, () => console.log("server login"));

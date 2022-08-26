@@ -1,8 +1,13 @@
+const { ObjectID, ObjectId } = require("bson");
 const mongoose = require("mongoose");
 const roomschema = mongoose.Schema(
   {
     id: {
-      type: Object,
+      type: Number,
+      require: true,
+    },
+    _id: {
+      type: ObjectId,
       require: true,
     },
     name: {
